@@ -1,0 +1,46 @@
+.center {
+  text-align: center;
+}
+
+.header-secondary {
+  font-size: 4.4rem;
+  line-height: 1.2;
+  margin-bottom: 9.6rem;
+}
+
+.header-tertiary {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.944);
+}
+
+.subheading {
+  display: block;
+  margin: 1.6rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Style for the button */
+.button-icon {
+  background-color: transparent; /* Make button background transparent */
+  border: none; /* Remove default border */
+  cursor: pointer; /* Indicate clickable item */
+  display: flex; /* Center icon inside button */
+  justify-content: center;
+  align-items: center;
+  padding: 1rem; /* Remove default padding */
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+/* Optional: Add styles for hover effect on the button */
+.button-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Slight highlight on hover */
+}
+
+/* If you need to ensure the icon color via CSS, this method applies if the icon inherits the color */
+.button-icon svg {
+  color: white; /* Set icon color to white */
+}

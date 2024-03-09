@@ -1,0 +1,5 @@
+.container {
+  padding: 1rem;
+  margin: 0 2%;
+  overflow: hidden; /* Ensure the container itself does not scroll */
+}

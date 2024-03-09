@@ -1,0 +1,62 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
+.nav-menu {
+  background-color: rgba(1, 1, 122, 0.98);
+  margin-bottom: 2rem;
+  width: 32rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 2s ease-out;
+}
+
+.active {
+  left: 0;
+  transition: 1s ease-out;
+  z-index: 6;
+}
+
+.nav-menu-items {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.nav-text a {
+  padding: 3.2rem 2rem;
+  display: block;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.3s;
+  width: 100%;
+  cursor: pointer;
+}
+
+.nav-text a:hover,
+.nav-text a:active {
+  background-color: rgba(0, 0, 111, 0.98);
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.8rem;
+  align-items: center;
+  background-color: rgba(3, 11, 106, 0.98);
+}
+
+.nav-header img {
+  max-width: 9.2rem;
+}
