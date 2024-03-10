@@ -1,7 +1,7 @@
 import "./carousel.css";
 import "../../../styles/general.css";
 import defaultThumbnail from "../../../assets/default.webp";
-import { useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Slider from "react-slick";
 
@@ -14,6 +14,12 @@ const Carousel = ({ type }) => {
 
   const { state } = useEvents();
   const events = state.events[type] || [];
+
+  useEffect(() => {
+    if (events.length > 0) {
+      setCurrentEvent(events[0]);
+    }
+  }, [events]);
 
   console.log(events);
 
