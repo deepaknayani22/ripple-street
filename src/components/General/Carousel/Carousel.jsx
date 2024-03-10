@@ -1,17 +1,21 @@
 import "./carousel.css";
 import "../../../styles/general.css";
 import defaultThumbnail from "../../../assets/default.webp";
-import { useEffect, useState, useCallback } from "react";
-import { IoIosAdd, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useState, useCallback } from "react";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Slider from "react-slick";
-import axios from "axios";
 
 import CarouselTitle from "./CarouselTitle";
+import { useEvents } from "../../../contexts/EventContext";
 
-const Carousel = ({ carouselHeroEvent }) => {
-  const [heroEvent, setHeroEvent] = useState([]);
+const Carousel = ({ type }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [currentEvent, setCurrentEvent] = useState(null);
+
+  const { state } = useEvents();
+  const events = state.events[type] || [];
+
+  console.log(events);
 
   const NextArrow = useCallback(({ onClick }) => {
     return (
@@ -29,25 +33,6 @@ const Carousel = ({ carouselHeroEvent }) => {
     );
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(
-          `http://localhost:1234/${carouselHeroEvent}`
-        );
-        const eventData = response.data;
-        setHeroEvent(eventData.events);
-        if (eventData.events.length > 0) {
-          setCurrentEvent(eventData.events[0]);
-          console.log(currentEvent);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchData();
-  }, []);
-
   const settings = {
     infinite: true,
     lazyLoad: true,
@@ -59,15 +44,15 @@ const Carousel = ({ carouselHeroEvent }) => {
     prevArrow: <PrevArrow />,
     beforeChange: (current, next) => {
       setImageIndex(next);
-      setCurrentEvent(heroEvent[next]);
+      setCurrentEvent(events[next]);
     },
   };
 
   return (
     <div className="carousel">
-      <h2 className="carousel-header">Upcoming Events</h2>
+      <h2 className="carousel-header">Experiencing Events</h2>
       <Slider {...settings}>
-        {heroEvent.map((ele, idx) => {
+        {events.map((ele, idx) => {
           return (
             <div
               key={idx}

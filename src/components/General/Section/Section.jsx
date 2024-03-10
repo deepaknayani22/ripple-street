@@ -1,25 +1,11 @@
 import "./section.css";
 import defaultThumbnail from "../../../assets/default.webp";
 import Card from "../Card/Card";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEvents } from "../../../contexts/EventContext";
 
 export default function Section({ type }) {
-  const [events, setEvents] = useState([]);
-
-  //Use Effect to do an API fetch based on type
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(`http://localhost:1234/${type}`);
-        const eventData = response.data;
-        setEvents(eventData.events);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchData();
-  }, []);
+  const { state } = useEvents();
+  const events = state.events[type] || [];
 
   const getTitle = (type) => {
     switch (type) {
@@ -43,7 +29,7 @@ export default function Section({ type }) {
         {events.map((ele, index) => {
           return (
             <Card
-              key={index} // Use a unique identifier if available, otherwise fallback to index
+              key={index}
               thumbnail={ele.heroAsset?.url || { defaultThumbnail }}
               name={ele.name}
             />
