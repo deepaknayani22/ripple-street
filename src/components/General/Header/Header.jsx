@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { TfiMenu } from "react-icons/tfi";
 import logo from "../../../assets/ripplestreet_logo.png";
 import "../../../styles/general.css";
@@ -11,6 +12,10 @@ const Header = () => {
   const [sideNav, setSideNav] = useState(false);
   function toggleSideNav() {
     setSideNav(!sideNav);
+  }
+
+  function toKebabCase(str) {
+    return str.toLowerCase().trim().replace(/[\s]+/g, "-");
   }
 
   const navElements = [
@@ -38,9 +43,16 @@ const Header = () => {
         <ul className="main-nav-list">
           {navElements.map((ele, index) => (
             <li key={index}>
-              <a className="main-nav-link" href="#">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive && ele !== "Sign Up"
+                    ? "main-nav-link active"
+                    : "main-nav-link"
+                }
+                to={toKebabCase(ele)}
+              >
                 {ele}
-              </a>
+              </NavLink>
               {/* Add the href placeholders later */}
             </li>
           ))}

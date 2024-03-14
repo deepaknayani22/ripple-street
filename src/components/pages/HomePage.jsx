@@ -28,7 +28,6 @@ const HomePage = () => {
   // );
   return (
     <div>
-      <Header />
       <Carousel type="experiencingEvents" />
       <Section type="acceptingApplications" />
       <Section type="pastEvents" />

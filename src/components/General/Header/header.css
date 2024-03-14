@@ -52,3 +52,7 @@
 .logo-container button {
   background-color: rgba(255, 255, 255, 0);
 }
+
+.main-nav-link.active {
+  color: #ff9912;
+}
