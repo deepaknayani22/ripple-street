@@ -10,39 +10,40 @@ export default function Section({ type }) {
   const eventsPerPage = 4;
   const totalPages = Math.ceil(events.length / eventsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
+  const [fadeClass, setFadeClass] = useState("");
   const containerRef = useRef(null);
-
-  //Horizonatal Pagination Scrolling
-  const [translateX, setTranslateX] = useState(0);
-  useEffect(() => {
-    const pageOffset = (currentPage - 1) * 25;
-    setTranslateX(-pageOffset);
-  }, [currentPage]);
 
   const handleNext = (e) => {
     e.preventDefault();
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-      // scrollToEvents();
+      navigatePage(currentPage + 1);
     }
   };
 
   const handlePrev = (e) => {
     e.preventDefault();
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-      // scrollToEvents();
+      navigatePage(currentPage - 1);
     }
   };
-
-  // const scrollToEvents = () => {
-  //   containerRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
 
   const currentEvents = events.slice(
     (currentPage - 1) * eventsPerPage,
     currentPage * eventsPerPage
   );
+
+  useEffect(() => {
+    setFadeClass("fade-enter");
+    const timer = setTimeout(() => setFadeClass(""), 300); //NOTE : Match it with the animation speed in CSS
+    return () => clearTimeout(timer);
+  }, [currentPage]);
+
+  const navigatePage = (newPage) => {
+    setFadeClass("fade-exit");
+    setTimeout(() => {
+      setCurrentPage(newPage);
+    }, 250);
+  };
 
   const getTitle = (type) => {
     switch (type) {
@@ -88,10 +89,7 @@ export default function Section({ type }) {
           </button>
         </div>
       </div>
-      <div
-        className="card-row"
-        // style={{ transform: `translateX(${translateX}%)` }}
-      >
+      <div className={`card-row ${fadeClass}`}>
         {currentEvents.map((ele, index) => (
           <Card
             key={index}
